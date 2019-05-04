@@ -40,8 +40,8 @@ class Image():
         return(letters)
 
 
-    def preprocessing(self):
-        """preprocceses the image and returns the list of letters as a numpy array"""
+    def preprocess(self):
+        """preprocceses the image and returns the cropped numpy arrays of each letter in the same sequance of the original image"""
         self.image.convert("L") #converts the image to grey scale
         self.image = np.asarray(self.image)
         self.image = PIL.ImageOps.invert(self.image) #inverts the color of the image to help is the cutting process
