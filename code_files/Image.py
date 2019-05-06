@@ -29,9 +29,9 @@ class Image():
         letters = []
         crop_img = []
         for row in range(len(self.image[:,0])):
-            if np.sum(self.image[:,i]) != 0:
+            if np.sum(self.image[:,row]) != 0:
                 for i in range(len(self.image[:,0])):
-                    crop_img.append(self.image[row,i])
+                    crop_img[i].append(self.image[:,row])
 
             elif len(crop_img) != 0:
                 letters.append(np.array(crop_img))
