@@ -47,9 +47,26 @@ class Img():
 
 
     def preprocess(self):
-        """preprocceses the image and returns the cropped numpy arrays of each letter in the same sequance of the original image and returns the letters as a list of numpy arrays"""
+        """
+        preprocceses the image and returns the cropped numpy arrays of each letter in the same sequance of the original image
+        
+        returns the letters as a list of normalized numpy arrays
+        """
         self.image = ImageOps.invert(self.image) #inverts the color of the image to help is the cutting process
         self.image = np.asarray(self.image)
-        self.image = preprocessing.normalize(self.image) #normalizes the image for the model
+        #self.image = preprocessing.normalize(self.image) 
         letters = self.to_letters()
+        #resizes all the letters into same shape and size while keeping the aspect ratio
+        for i in range(len(letters)):
+            letter = Image.fromarray(np.uint8(letters[i])) #it doesnt work because the image is normalized
+            letter.thumbnail((35,35))
+            letter.convert("L")
+            bg_img = Image.new("L", (35,35))
+            loc = (int(bg_img.width/2 - letter.width/2), int(bg_img.height/2 - letter.height/2))
+            bg_img.paste(letter, loc)
+            bg_img = np.asarray(bg_img)
+            bg_img = preprocessing.normalize(bg_img) #normalizes the array of the image for the model
+            letters[i] = bg_img
+
+
         return(letters)
