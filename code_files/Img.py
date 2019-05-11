@@ -68,5 +68,4 @@ class Img():
             bg_img = preprocessing.normalize(bg_img) #normalizes the array of the image for the model
             letters[i] = bg_img
 
-
         return(letters)
