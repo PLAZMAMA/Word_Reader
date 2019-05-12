@@ -18,6 +18,7 @@ class Model():
         y = [] #labels 
 
         #extracts the data from the letters folder
+        num_label = 0
         for folder in self.classes:
             folder_len = os.listdir(f"data/letters{folder}")
             folder_len = [file for file in folder_len if ".jpg" in file]
@@ -26,6 +27,7 @@ class Model():
                 letter_img = np.asarray(letter_img, dtype = np.float64) #converts the image to a numpy array
                 x.append(letter_img)
                 y.append(folder)
+            num_label += 1
 
         #suffles the data
         for i in range(len(x)):
@@ -54,8 +56,18 @@ class Model():
 
     def fit(self):
         """trains the model on the data"""
-        pass
+        x_train, y_train, x_test, y_test = self.train_test_split()
+        self.model = svm.SVC()
+        self.model.fit(x_train, y_train)
+        print(f"score: {self.model.score(x_test, y_test)}")
 
-    def predict(self):
+    def predict(self, img_path):
         """predicts a given picture of a word and returns the prediction"""
-        pass
+        img = Img(img_path)
+        letters = img.preprocess()
+        word = ""
+        for letter in letters:
+            prediction = self.model.predict(letter)
+            word += self.classes[prediction]
+
+        return(word)
