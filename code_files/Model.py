@@ -56,16 +56,17 @@ class Model():
 
     def fit(self):
         """trains the model on the data"""
-        x_train, y_train, x_test, y_test = self.train_test_split()
-        self.model = svm.SVC()
-        self.model.fit(x_train, y_train)
-        print(f"score: {self.model.score(x_test, y_test)}")
+        x_train, y_train, x_test, y_test = self.train_test_split() #creates the training and testing data
+        self.model = svm.SVC() #defines the model
+        self.model.fit(x_train, y_train) #trains the model
+        print(f"score: {self.model.score(x_test, y_test)}") #displayes the testing score
 
     def predict(self, img_path):
         """predicts a given picture of a word and returns the prediction"""
         img = Img(img_path)
         letters = img.preprocess()
         word = ""
+        #runs throught each letter, predicts them and adds each to the word
         for letter in letters:
             prediction = self.model.predict(letter)
             word += self.classes[prediction]
