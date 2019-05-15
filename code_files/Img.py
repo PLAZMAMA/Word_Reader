@@ -48,7 +48,7 @@ class Img():
 
     def preprocess(self):
         """
-        preprocceses the image and returns the cropped numpy arrays of each letter in the same sequance of the original image
+        preprocceses the image and returns the cropped PIL images of each letter in the same sequance of the original image
         
         returns the letters as a list of normalized numpy arrays
         """

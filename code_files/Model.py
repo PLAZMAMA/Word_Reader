@@ -59,7 +59,8 @@ class Model():
         x_train, y_train, x_test, y_test = self.train_test_split() #creates the training and testing data
         self.model = svm.SVC() #defines the model
         self.model.fit(x_train, y_train) #trains the model
-        print(f"score: {self.model.score(x_test, y_test)}") #displayes the testing score
+        accuracy = self.model.score(x_test, y_test)
+        print(f"score: {accuracy}") #displayes the testing score
 
     def predict(self, img_path):
         """predicts a given picture of a word and returns the prediction"""
