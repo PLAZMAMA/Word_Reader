@@ -51,10 +51,10 @@ class Img():
         img = img.tolist()
         for array in img:
             for i in range(len(array)):
-                if array[i] > 125:
+                if array[i] > 135:
                     array[i] = 255
         img = np.array(img, dtype = np.float64)
-        self.image = Image.fromarray(img).convert("L")
+        self.image = Image.fromarray(np.uint8(img))
 
 
     def preprocess(self):
@@ -79,6 +79,6 @@ class Img():
             bg_img = np.asarray(bg_img)
             bg_img = preprocessing.normalize(bg_img) #normalizes the array of the image for the model
             letters[i] = bg_img
-        self.image = Image.fromarray(self.image)
+        self.image = Image.fromarray(np.uint8(self.image))
 
         return(letters)
