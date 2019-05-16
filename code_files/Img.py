@@ -45,13 +45,25 @@ class Img():
 
         return(letters)
 
+    def prepare(self):
+        """prepares the image to start the preprocessing process"""
+        img = np.asarray(self.image)
+        img = img.tolist()
+        for array in img:
+            for i in range(len(array)):
+                if array[i] > 150:
+                    array[i] = 255
+        img = np.array(img, dtype = np.float64)
+        self.image = Image.fromarray(img).convert("L")
+
 
     def preprocess(self):
         """
-        preprocceses the image and returns the cropped PIL images of each letter in the same sequance of the original image
+        preprocceses the image and returns the cropped numpy arrays of each letter in the same sequance of the original image
         
         returns the letters as a list of normalized numpy arrays
         """
+        self.prepare()
         self.image = ImageOps.invert(self.image) #inverts the color of the image to help is the cutting process
         self.image = np.asarray(self.image)
         #self.image = preprocessing.normalize(self.image) 
