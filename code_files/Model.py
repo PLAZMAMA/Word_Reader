@@ -59,6 +59,7 @@ class Model():
     def fit(self):
         """trains the model on the data"""
         x_train, y_train, x_test, y_test = self.train_test_split() #creates the training and testing data
+        #flattens the arrays of the images 35x35->1225
         flat_x_train = [im.flatten() for im in x_train]
         flat_x_test = [im.flatten() for im in x_test]
         x_train = np.array(flat_x_train)
