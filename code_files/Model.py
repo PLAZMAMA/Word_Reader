@@ -20,8 +20,9 @@ class Model():
         #extracts the data from the letters folder
         num_label = 0
         for folder in self.classes:
-            folder_len = os.listdir(f"data/letters{folder}")
+            folder_len = os.listdir(f"data/letters/{folder}")
             folder_len = [file for file in folder_len if ".jpg" in file]
+            folder_len = len(folder_len)
             for i in range(folder_len):
                 letter_img = Image.open(f"data/letters/{folder}/{i}") #gets the image
                 letter_img = np.asarray(letter_img, dtype = np.float64) #converts the image to a numpy array
@@ -39,7 +40,7 @@ class Model():
             x.append(pop_x)
             y.append(pop_y)
 
-        percent_split = (size *x) / 100
+        percent_split = int((size * len(x)) / 100)
 
         
         #splits the data to train and test data
