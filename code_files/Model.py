@@ -60,7 +60,7 @@ class Model():
         flat_x_test = [im.flatten() for im in x_test]
         x_train = np.array(flat_x_train)
         x_test = np.array(flat_x_test)
-        self.model = svm.SVC(gamma = "auto", kernel = "poly") #defines the model
+        self.model = svm.SVC(gamma = "auto", kernel = "poly", tol = 1e-8) #defines the model
         self.model.fit(x_train, y_train) #trains the model
         accuracy = self.model.score(x_test, y_test)
         print(f"score: {accuracy}") #displayes the testing score
