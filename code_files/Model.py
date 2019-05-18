@@ -52,10 +52,6 @@ class Model():
         
         return(x_train, y_train, x_test, y_test)
 
-
-
-
-
     def fit(self):
         """trains the model on the data"""
         x_train, y_train, x_test, y_test = self.train_test_split() #creates the training and testing data
