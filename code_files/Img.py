@@ -51,7 +51,7 @@ class Img():
         img = img.tolist()
         for array in img:
             for i in range(len(array)):
-                if array[i] > 135:
+                if array[i] > 140:
                     array[i] = 255
         img = np.array(img, dtype = np.float64)
         self.image = Image.fromarray(np.uint8(img))
