@@ -77,7 +77,7 @@ class Img():
             loc = (int(bg_img.width/2 - letter.width/2), int(bg_img.height/2 - letter.height/2))
             bg_img.paste(letter, loc)
             bg_img = np.asarray(bg_img)
-            #bg_img = preprocessing.normalize(bg_img) #normalizes the array of the image for the model
+            bg_img = preprocessing.normalize(bg_img) #normalizes the array of the image for the model (only comment when preprocessing data pictures)
             letters[i] = bg_img
         self.image = Image.fromarray(np.uint8(self.image))
 
