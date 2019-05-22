@@ -10,9 +10,10 @@ class Window(Frame):
 
     def init_window(self):
         self.master.title("Word Reader")
-        self.pack(fill=BOTH, expand=1)
-        convertButton=Button(self, text="convert")
+        img_display=Canvas(root, width=200, height=200)#make canvas
+        convertButton=Button(self, text="convert")#make button
         convertButton.place(x=0,y=0)
+        self.pack(fill=BOTH, expand=1)
 
 
 root = Tk()
