@@ -7,8 +7,9 @@ class GUI:
         self.master = master
         master.title("Word Reader")
 
-        self.label = Label(master, text="This is our first GUI!")
-        self.label.pack()
+        self.img_view = Canvas(master,width=200, height=100)
+        self.img_view.pack()
+        self.img_view.create_rectangle(50, 25, 150, 75, fill="blue")
 
         self.greet_button = Button(master, text="Greet", command=self.greet)
         self.greet_button.pack()
