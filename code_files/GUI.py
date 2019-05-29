@@ -11,15 +11,20 @@ class GUI:
         self.image_view.pack()
         self.image_view.create_rectangle(50, 25, 150, 75, fill="blue")
 
-        self.greet_button = Button(master, text="Greet", command=self.greet)
-        self.greet_button.pack()
+        self.convert_button = Button(master, text="Convert", command=self.convert)
+        self.convert_button.pack()
 
-        self.close_button = Button(master, text="Close", command=master.quit)
-        self.close_button.pack()
+        self.copy_button = Button(master, text="Copy", command=self.copy)
+        self.copy_button.pack()
 
-    def greet(self):
-        print("Greetings!")
+    #fuction for convert button
+    def convert(self):
+        print("convert")
+    #function for copy button
+    def copy(self):
+        print("copy")
 
+        
 root = Tk()
 my_gui = GUI(root)
 root.mainloop()
