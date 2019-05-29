@@ -1,45 +1,24 @@
 #Mahi and Hargun
+from tkinter import * 
 
-from tkinter import * #the "*" means imoprt everythin
-#below just initializes everything
-class Window(Frame):
+
+class GUI:
     def __init__(self, master):
-        Frame.__init__(self, master)
         self.master = master
-        self.init_window()
+        master.title("Word Reader")
 
-    def init_window(self):
-        self.master.title("Word Reader")
-        img_display=Canvas(root, width=200, height=200)#make canvas
-        convertButton=Button(self, text="convert")#make button
-        convertButton.place(x=0,y=0)
-        self.pack(fill=BOTH, expand=1)
+        self.label = Label(master, text="This is our first GUI!")
+        self.label.pack()
 
+        self.greet_button = Button(master, text="Greet", command=self.greet)
+        self.greet_button.pack()
+
+        self.close_button = Button(master, text="Close", command=master.quit)
+        self.close_button.pack()
+
+    def greet(self):
+        print("Greetings!")
 
 root = Tk()
-
-app = Window(root)
-
+my_gui = GUI(root)
 root.mainloop()
-
-
-
-
-
-
-
-
-        #super().__init__(master)
-        #self.master = master #main window 
-
-    #def set_win(self):
-
-
-        
-       
-
-#if __name__ == "__main__":
-    #root = Tk() #root of the window
-    #app = Window(root)
-    #app.set_win()
-    #root.mainloop() #generates the window
