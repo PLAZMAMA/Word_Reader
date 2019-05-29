@@ -1,6 +1,6 @@
 #Mahi and Hargun
 from tkinter import * 
-
+from tkinter import scrolledtext
 
 class GUI:
     def __init__(self, master):
@@ -16,6 +16,10 @@ class GUI:
 
         self.copy_button = Button(master, text="Copy", command=self.copy)
         self.copy_button.pack()
+
+        self.textbox = scrolledtext.ScrolledText(self.master,width=40,height=10)
+        self.textbox.pack()
+
 
     #fuction for convert button
     def convert(self):
