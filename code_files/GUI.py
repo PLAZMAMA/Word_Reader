@@ -1,16 +1,20 @@
 #Mahi and Hargun
 from tkinter import * 
 from tkinter import scrolledtext
+from tkinter import filedialog
 from PIL import ImageTk,Image
 import glob, os
 
-size = 500, 500 #Thumbnail size
-#makes thumbnail of input.png, which makes it resize correctly for this. input.thumbnail only used for GUI
-for infile in glob.glob("*.png"):
-    file, ext = os.path.splitext(infile)
-    im = Image.open(infile)
-    im.thumbnail(size)
-    im.save(file + ".thumbnail", "PNG")
+def resize_img():
+    size = 500, 500 #Thumbnail size
+    #makes thumbnail of input.png, which makes it resize correctly for this. input.thumbnail only used for GUI
+    for infile in glob.glob("*.png"):
+        file, ext = os.path.splitext(infile)
+        im = Image.open(infile)
+        im.thumbnail(size)
+        im.save(file + ".thumbnail", "PNG")
+
+resize_img()
 
 class GUI:
     def __init__(self, master):
@@ -29,7 +33,12 @@ class GUI:
 
         #Canvas click event(gets file opener)
         def click(event):
-            print("clicked")
+            file_path = filedialog.askopenfilename()
+            im = Image.open(file_path)
+            im.save("input.png","PNG")
+            resize_img()
+            self.input_image=ImageTk.PhotoImage(Image.open("input.thumbnail"))
+            self.image = self.image_view.create_image(0, 0, anchor=NW, image=self.input_image)
 
         #Canvas
         self.input_image=ImageTk.PhotoImage(Image.open("input.thumbnail")) #Image input file
