@@ -7,9 +7,10 @@ class GUI:
         self.master = master
         master.title("Word Reader")
 
+        input_image=input.png
         self.image_view = Canvas(master, width=200, height=100)
         self.image_view.pack()
-        self.image_view.create_rectangle(50, 25, 150, 75, fill="blue")
+        self.image_view.create_image(50, 25, img=input_image)
 
         self.convert_button = Button(master, text="Convert", command=self.convert)
         self.convert_button.pack()
