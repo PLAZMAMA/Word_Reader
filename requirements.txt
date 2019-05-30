@@ -5,5 +5,3 @@ matplotlib
 os
 random
 tkinter
-pip install Pillow
-pyperclip
