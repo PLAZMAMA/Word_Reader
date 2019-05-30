@@ -4,6 +4,7 @@ from tkinter import scrolledtext
 from tkinter import filedialog
 from PIL import ImageTk,Image
 import glob, os
+import pyperclip
 
 def resize_img():
     size = 500, 500 #Thumbnail size
