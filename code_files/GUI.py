@@ -4,6 +4,7 @@ from tkinter import scrolledtext
 from tkinter import filedialog
 from PIL import ImageTk,Image
 import glob, os
+import pyperclip
 
 def resize_img():
     size = 500, 500 #Thumbnail size
@@ -49,6 +50,7 @@ class GUI:
 
         #output box
         self.textbox = scrolledtext.ScrolledText(self.right_side,width=50,height=25)
+        #self.textbox.bind('<Control-c>', self.textbox.copy)
         self.textbox.pack()
         
         #convert button
@@ -67,7 +69,9 @@ class GUI:
         print("convert")
     #function for copy button
     def copy(self):
-        print("copy")
+        copy_text = self.textbox.get("1.0",END)
+        root.clipboard_clear()
+        root.clipboard_append(copy_text)
 
         
 root = Tk()
