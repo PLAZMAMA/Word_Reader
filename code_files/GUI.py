@@ -2,6 +2,16 @@
 from tkinter import * 
 from tkinter import scrolledtext
 from PIL import ImageTk,Image
+import glob, os
+
+size = 500, 500 #Thumbnail size
+#makes thumbnail of input.png, which makes it resize correctly for this. input.thumbnail only used for GUI
+for infile in glob.glob("*.png"):
+    file, ext = os.path.splitext(infile)
+    im = Image.open(infile)
+    im.thumbnail(size)
+    im.save(file + ".thumbnail", "PNG")
+
 class GUI:
     def __init__(self, master):
         self.master = master
@@ -19,7 +29,7 @@ class GUI:
 
 
         #Canvas
-        self.input_image=ImageTk.PhotoImage(Image.open("input.png")) #Image input file
+        self.input_image=ImageTk.PhotoImage(Image.open("input.thumbnail")) #Image input file
         self.image_view = Canvas(self.left_side, width=500, height=500)
         self.image_view.pack()
         self.image_view.create_image(0, 0, anchor=NW, image=self.input_image)
