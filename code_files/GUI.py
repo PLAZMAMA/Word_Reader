@@ -1,25 +1,42 @@
 #Mahi and Hargun
 from tkinter import * 
 from tkinter import scrolledtext
-#test
+from PIL import ImageTk,Image
 class GUI:
     def __init__(self, master):
         self.master = master
         master.title("Word Reader")
 
-        input_image=input.png
-        self.image_view = Canvas(master, width=200, height=100)
-        self.image_view.pack()
-        self.image_view.create_image(50, 25, img=input_image)
+        #Left frame, contains canvas
+        self.left_side = Frame(root)
+        self.left_side.pack(fill='both', expand='yes')
+        self.left_side.place(x=0,y=0)
 
-        self.convert_button = Button(master, text="Convert", command=self.convert)
+        #Right frame, contains everything else
+        self.right_side = Frame(root)
+        self.right_side.pack(fill='both',expand='yes')
+        self.right_side.place(x=500,y=0)
+
+
+        #Canvas
+        self.input_image=ImageTk.PhotoImage(Image.open("input.png")) #Image input file
+        self.image_view = Canvas(self.left_side, width=500, height=500)
+        self.image_view.pack()
+        self.image_view.create_image(0, 0, anchor=NW, image=self.input_image)
+
+        #output box
+        self.textbox = scrolledtext.ScrolledText(self.right_side,width=50,height=25)
+        self.textbox.pack()
+        
+        #convert button
+        self.convert_button = Button(self.right_side, text="Convert", command=self.convert)
         self.convert_button.pack()
 
-        self.copy_button = Button(master, text="Copy", command=self.copy)
+        #copy button
+        self.copy_button = Button(self.right_side, text="Copy", command=self.copy)
         self.copy_button.pack()
 
-        self.textbox = scrolledtext.ScrolledText(self.master,width=40,height=10)
-        self.textbox.pack()
+
 
 
     #fuction for convert button
@@ -31,5 +48,6 @@ class GUI:
 
         
 root = Tk()
+root.geometry("925x510") #GUI start size
 my_gui = GUI(root)
 root.mainloop()
