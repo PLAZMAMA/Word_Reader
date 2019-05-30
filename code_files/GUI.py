@@ -27,12 +27,16 @@ class GUI:
         self.right_side.pack(fill='both',expand='yes')
         self.right_side.place(x=500,y=0)
 
+        #Canvas click event(gets file opener)
+        def click(event):
+            print("clicked")
 
         #Canvas
         self.input_image=ImageTk.PhotoImage(Image.open("input.thumbnail")) #Image input file
         self.image_view = Canvas(self.left_side, width=500, height=500)
+        self.image_view.bind('<Button-1>', click) #Bind click function to canvas
+        self.image = self.image_view.create_image(0, 0, anchor=NW, image=self.input_image)
         self.image_view.pack()
-        self.image_view.create_image(0, 0, anchor=NW, image=self.input_image)
 
         #output box
         self.textbox = scrolledtext.ScrolledText(self.right_side,width=50,height=25)
