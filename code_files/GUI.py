@@ -3,6 +3,7 @@ from tkinter import *
 from tkinter import scrolledtext
 from tkinter import filedialog
 from PIL import ImageTk,Image
+#from PIL import ImageGrab
 import glob, os
 import pyperclip
 
@@ -46,11 +47,12 @@ class GUI:
         self.image_view = Canvas(self.left_side, width=500, height=500)
         self.image_view.bind('<Button-1>', click) #Bind click function to canvas
         self.image = self.image_view.create_image(0, 0, anchor=NW, image=self.input_image)
+        self.image_view.bind('<Control-v>', self.paste)
         self.image_view.pack()
 
         #output box
         self.textbox = scrolledtext.ScrolledText(self.right_side,width=50,height=25)
-        #self.textbox.bind('<Control-c>', self.textbox.copy)
+        self.textbox.bind('<Control-c>', self.copy)
         self.textbox.pack()
         
         #convert button
@@ -72,6 +74,13 @@ class GUI:
         copy_text = self.textbox.get("1.0",END)
         root.clipboard_clear()
         root.clipboard_append(copy_text)
+    #paste function
+    def paste(self):
+        im = ImageGrab.grabclipboard()
+        im.save('input.png','PNG')
+        resize_img()
+        self.input_image=ImageTk.PhotoImage(Image.open("input.thumbnail"))
+        self.image = self.image_view.create_image(0, 0, anchor=NW, image=self.input_image)
 
         
 root = Tk()
