@@ -63,7 +63,7 @@ class Model():
         self.model = svm.SVC(C = 2, gamma = "auto", kernel = "poly", tol = 1e-8) #defines the model
         self.model.fit(x_train, y_train) #trains the model
         accuracy = self.model.score(x_test, y_test)
-        print(f"score: {accuracy}") #displayes the testing score
+        return(accuracy)
 
     def predict(self, img_path):
         """predicts a given picture of a word and returns the prediction"""
