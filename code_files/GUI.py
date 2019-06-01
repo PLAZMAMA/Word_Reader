@@ -3,7 +3,7 @@ from tkinter import *
 from tkinter import scrolledtext
 from tkinter import filedialog
 from PIL import ImageTk,Image
-#from PIL import ImageGrab
+from PIL import ImageGrab
 import glob, os
 import pyperclip
 
@@ -16,20 +16,20 @@ def resize_img():
         im.thumbnail(size)
         im.save(file + ".thumbnail", "PNG")
 
-resize_img()
+#resize_img()
 
 class GUI:
     def __init__(self, master):
         self.master = master
-        master.title("Word Reader")
+        self.master.title("Word Reader")
 
         #Left frame, contains canvas
-        self.left_side = Frame(root)
+        self.left_side = Frame(self.master)
         self.left_side.pack(fill='both', expand='yes')
         self.left_side.place(x=0,y=0)
 
         #Right frame, contains everything else
-        self.right_side = Frame(root)
+        self.right_side = Frame(self.master)
         self.right_side.pack(fill='both',expand='yes')
         self.right_side.place(x=500,y=0)
 
@@ -38,8 +38,8 @@ class GUI:
             file_path = filedialog.askopenfilename()
             im = Image.open(file_path)
             im.save("input.png","PNG")
-            resize_img()
-            self.input_image=ImageTk.PhotoImage(Image.open("input.thumbnail"))
+            self.resize_img()
+            self.input_image = ImageTk.PhotoImage(Image.open("input.thumbnail"))
             self.image = self.image_view.create_image(0, 0, anchor=NW, image=self.input_image)
 
         #Canvas
@@ -62,28 +62,29 @@ class GUI:
         #copy button
         self.copy_button = Button(self.right_side, text="Copy", command=self.copy)
         self.copy_button.pack()
+    
+    def resize_img(self):
+        """makes thumbnail of input.png, which makes it resize correctly for this. input.thumbnail only used for GUI"""
+        size = 500, 500 #Thumbnail size
+        for infile in glob.glob("*.png"):
+            file, ext = os.path.splitext(infile)
+            im = Image.open(infile)
+            im.thumbnail(size)
 
-
-
-
-    #fuction for convert button
     def convert(self):
+        """fuction for convert button"""
         print("convert")
-    #function for copy button
+    
     def copy(self):
+        """function for copy button"""
         copy_text = self.textbox.get("1.0",END)
-        root.clipboard_clear()
-        root.clipboard_append(copy_text)
-    #paste function
+        self.master.clipboard_clear()
+        self.master.clipboard_append(copy_text)
+    
     def paste(self):
+        """paste function"""
         im = ImageGrab.grabclipboard()
         im.save('input.png','PNG')
-        resize_img()
+        self.resize_img()
         self.input_image=ImageTk.PhotoImage(Image.open("input.thumbnail"))
         self.image = self.image_view.create_image(0, 0, anchor=NW, image=self.input_image)
-
-        
-root = Tk()
-root.geometry("925x510") #GUI start size
-my_gui = GUI(root)
-root.mainloop()
