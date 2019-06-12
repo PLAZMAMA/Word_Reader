@@ -55,10 +55,8 @@ class GUI:
     def resize_img(self):
         """makes thumbnail of input.png, which makes it resize correctly for this. input.thumbnail only used for GUI"""
         size = 500, 500 #Thumbnail size
-        for infile in glob.glob("*.png"):
-            file, ext = os.path.splitext(infile)
-            im = Image.open(infile)
-            im.thumbnail(size)
+        im = Image.open("input.png")
+        im.thumbnail(size)
 
     def convert(self):
         """fuction for convert button"""
