@@ -28,11 +28,11 @@ class GUI:
             im = Image.open(file_path)
             im.save("input.png","PNG")
             self.resize_img()
-            self.input_image = ImageTk.PhotoImage(Image.open("input.thumbnail"))
+            self.input_image = ImageTk.PhotoImage(Image.open("input.png"))
             self.image = self.image_view.create_image(0, 0, anchor=NW, image=self.input_image)
 
         #Canvas
-        self.input_image=ImageTk.PhotoImage(Image.open("input.thumbnail")) #Image input file
+        self.input_image=ImageTk.PhotoImage(Image.open("input.png")) #Image input file
         self.image_view = Canvas(self.left_side, width=500, height=500)
         self.image_view.bind('<Button-1>', click) #Bind click function to canvas
         self.image = self.image_view.create_image(0, 0, anchor=NW, image=self.input_image)
@@ -53,10 +53,11 @@ class GUI:
         self.copy_button.pack()
     
     def resize_img(self):
-        """makes thumbnail of input.png, which makes it resize correctly for this. input.thumbnail only used for GUI"""
+        """updates the input to the right size"""
         size = 500, 500 #Thumbnail size
         im = Image.open("input.png")
         im.thumbnail(size)
+        im.save("input.png")
 
     def convert(self):
         """fuction for convert button"""
