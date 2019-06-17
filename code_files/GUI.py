@@ -6,6 +6,7 @@ from PIL import ImageTk,Image
 from PIL import ImageGrab
 import glob, os
 import pyperclip
+from Model import Model
 
 class GUI:
     def __init__(self, master):
@@ -60,8 +61,8 @@ class GUI:
         im.save("input.png")
 
     def convert(self):
-        """fuction for convert button"""
-        print("convert")
+        """converts input.png into a string of a word"""
+        model = Model
     
     def copy(self):
         """function for copy button"""
