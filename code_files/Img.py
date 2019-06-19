@@ -64,7 +64,7 @@ class Img():
         returns the letters as a list of normalized numpy arrays
         """
         #self.prepare()
-        #self.image = ImageOps.invert(self.image) #inverts the color of the image to help is the cutting process
+        self.image = ImageOps.invert(self.image) #inverts the color of the image to help is the cutting process
         self.image = np.asarray(self.image)
         letters = self.to_letters()
         #resizes all the letters into same shape and size while keeping the aspect ratio
