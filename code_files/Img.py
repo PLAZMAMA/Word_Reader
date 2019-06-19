@@ -1,7 +1,6 @@
 import numpy as np
 from PIL import Image , ImageOps
 from sklearn import preprocessing
-import matplotlib.pyplot as plt
 
 class Img():
     def __init__(self, image_file):

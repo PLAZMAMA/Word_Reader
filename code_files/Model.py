@@ -4,7 +4,6 @@ import numpy as np
 from random import randint
 from PIL import Image
 import os
-import matplotlib.pyplot as plt
 import pickle as pk
 
 class Model():
