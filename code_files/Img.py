@@ -45,16 +45,16 @@ class Img():
 
         return(letters)
 
-    def prepare(self):
-        """prepares the image to start the preprocessing process"""
-        img = np.asarray(self.image)
-        img = img.tolist()
-        for array in img:
-            for i in range(len(array)):
-                if array[i] > 140:
-                    array[i] = 255
-        img = np.array(img, dtype = np.float64)
-        self.image = Image.fromarray(np.uint8(img))
+    #def prepare(self):
+    #    """prepares the image to start the preprocessing process"""
+    #    img = np.asarray(self.image)
+    #    img = img.tolist()
+    #    for array in img:
+    #        for i in range(len(array)):
+    #            if array[i] > 160:
+    #                array[i] = 255
+    #    img = np.array(img, dtype = np.float64)
+    #    self.image = Image.fromarray(np.uint8(img))
 
 
     def preprocess(self):
@@ -63,8 +63,8 @@ class Img():
         
         returns the letters as a list of normalized numpy arrays
         """
-        self.prepare()
-        self.image = ImageOps.invert(self.image) #inverts the color of the image to help is the cutting process
+        #self.prepare()
+        #self.image = ImageOps.invert(self.image) #inverts the color of the image to help is the cutting process
         self.image = np.asarray(self.image)
         letters = self.to_letters()
         #resizes all the letters into same shape and size while keeping the aspect ratio

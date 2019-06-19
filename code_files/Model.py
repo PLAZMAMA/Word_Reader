@@ -9,7 +9,7 @@ import pickle as pk
 
 class Model():
     def __init__(self):
-        self.classes = np.array(["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"])
+        self.classes = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
         #opening the pickle and loading the model inside it
         try:
             pickle = open("model.pickle", "rb")
@@ -86,7 +86,9 @@ class Model():
         word = ""
         #runs throught each letter, predicts them and adds each to the word
         for letter in letters:
+            letter = letter.flatten()
+            letter = letter.reshape(1, -1)
             prediction = self.model.predict(letter)
-            word += self.classes[prediction]
+            word += self.classes[prediction[0]] #"prediction[0]" because the prediction comes out as an array
 
         return(word)

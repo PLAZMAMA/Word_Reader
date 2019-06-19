@@ -4,14 +4,14 @@ from tkinter import scrolledtext
 from tkinter import filedialog
 from PIL import ImageTk,Image
 from PIL import ImageGrab
-import glob, os
-import pyperclip
+import os
 from Model import Model
 
 class GUI:
-    def __init__(self, master):
+    def __init__(self, master, size = "925x510"):
         self.master = master
         self.master.title("Word Reader")
+        self.master.geometry(size) #GUI start size
 
         #Left frame, contains canvas
         self.left_side = Frame(self.master)
@@ -33,7 +33,7 @@ class GUI:
             self.image = self.image_view.create_image(0, 0, anchor=NW, image=self.input_image)
 
         #Canvas
-        self.input_image=ImageTk.PhotoImage(Image.open("input.png")) #Image input file
+        self.input_image = ImageTk.PhotoImage(Image.open("input.png")) #Image input file
         self.image_view = Canvas(self.left_side, width=500, height=500)
         self.image_view.bind('<Button-1>', click) #Bind click function to canvas
         self.image = self.image_view.create_image(0, 0, anchor=NW, image=self.input_image)
@@ -62,7 +62,10 @@ class GUI:
 
     def convert(self):
         """converts input.png into a string of a word"""
-        model = Model
+        model = Model()
+        word = model.predict("input.png")
+        self.textbox.insert(END, word)
+
     
     def copy(self):
         """function for copy button"""
