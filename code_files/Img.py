@@ -1,7 +1,6 @@
 import numpy as np
 from PIL import Image , ImageOps
 from sklearn import preprocessing
-import matplotlib.pyplot as plt
 
 class Img():
     def __init__(self, image_file):
@@ -43,18 +42,22 @@ class Img():
         for i in range(len(letters)):
             letters[i] = self.vert_crop(letters[i])
 
+        #in case of the image only having a single letter that doesn't have white space on its sides
+        if len(letters) == 0:
+            letters.append(np.asarray(self.image))
+
         return(letters)
 
-    def prepare(self):
-        """prepares the image to start the preprocessing process"""
-        img = np.asarray(self.image)
-        img = img.tolist()
-        for array in img:
-            for i in range(len(array)):
-                if array[i] > 140:
-                    array[i] = 255
-        img = np.array(img, dtype = np.float64)
-        self.image = Image.fromarray(np.uint8(img))
+    #def prepare(self):
+    #    """prepares the image to start the preprocessing process"""
+    #    img = np.asarray(self.image)
+    #    img = img.tolist()
+    #    for array in img:
+    #        for i in range(len(array)):
+    #            if array[i] > 160:
+    #                array[i] = 255
+    #    img = np.array(img, dtype = np.float64)
+    #    self.image = Image.fromarray(np.uint8(img))
 
 
     def preprocess(self):
@@ -63,7 +66,7 @@ class Img():
         
         returns the letters as a list of normalized numpy arrays
         """
-        self.prepare()
+        #self.prepare()
         self.image = ImageOps.invert(self.image) #inverts the color of the image to help is the cutting process
         self.image = np.asarray(self.image)
         letters = self.to_letters()
@@ -76,8 +79,7 @@ class Img():
             loc = (int(bg_img.width/2 - letter.width/2), int(bg_img.height/2 - letter.height/2))
             bg_img.paste(letter, loc)
             bg_img = np.asarray(bg_img)
-            bg_img = preprocessing.normalize(bg_img) #normalizes the array of the image for the model (only comment when preprocessing pictures for the training and testing data)
             letters[i] = bg_img
         self.image = Image.fromarray(np.uint8(self.image))
-
+        self.image = ImageOps.invert(self.image)
         return(letters)
