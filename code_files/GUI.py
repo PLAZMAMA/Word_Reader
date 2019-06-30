@@ -3,7 +3,7 @@ from tkinter import *
 from tkinter import scrolledtext
 from tkinter import filedialog
 from PIL import ImageTk,Image
-#from PIL import ImageGrab
+from PIL import ImageGrab
 import glob, os
 import pyperclip
 
@@ -16,10 +16,9 @@ def resize_img():
         im.thumbnail(size)
         im.save(file + ".thumbnail", "PNG")
 
-resize_img()
-
 class GUI:
     def __init__(self, master):
+        resize_img()
         self.master = master
         master.title("Word Reader")
 
@@ -62,6 +61,10 @@ class GUI:
         #copy button
         self.copy_button = Button(self.right_side, text="Copy", command=self.copy)
         self.copy_button.pack()
+        
+        #paste button
+        self.paste_button = Button(self.right_side, text="Paste", command=self.paste)
+        self.paste_button.pack()
 
 
 
