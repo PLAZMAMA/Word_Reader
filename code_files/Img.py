@@ -42,6 +42,10 @@ class Img():
         for i in range(len(letters)):
             letters[i] = self.vert_crop(letters[i])
 
+        #in case of the image only having a single letter that doesn't have white space on its sides
+        if len(letters) == 0:
+            letters.append(np.asarray(self.image))
+
         return(letters)
 
     #def prepare(self):
@@ -75,8 +79,7 @@ class Img():
             loc = (int(bg_img.width/2 - letter.width/2), int(bg_img.height/2 - letter.height/2))
             bg_img.paste(letter, loc)
             bg_img = np.asarray(bg_img)
-            bg_img = preprocessing.normalize(bg_img) #normalizes the array of the image for the model (only comment when preprocessing pictures for the training and testing data)
             letters[i] = bg_img
         self.image = Image.fromarray(np.uint8(self.image))
-
+        self.image = ImageOps.invert(self.image)
         return(letters)
