@@ -4,29 +4,11 @@ from tkinter import scrolledtext
 from tkinter import filedialog
 from PIL import ImageTk,Image
 from PIL import ImageGrab
-<<<<<<< HEAD
 import os
 from Model import Model
 
 class GUI:
     def __init__(self, master, size = "925x510"):
-=======
-import glob, os
-import pyperclip
-
-def resize_img():
-    size = 500, 500 #Thumbnail size
-    #makes thumbnail of input.png, which makes it resize correctly for this. input.thumbnail only used for GUI
-    for infile in glob.glob("*.png"):
-        file, ext = os.path.splitext(infile)
-        im = Image.open(infile)
-        im.thumbnail(size)
-        im.save(file + ".thumbnail", "PNG")
-
-class GUI:
-    def __init__(self, master):
-        resize_img()
->>>>>>> 28c33c85968e94e24c10555f1671a08c532dcf68
         self.master = master
         self.master.title("Word Reader")
         self.master.geometry(size) #GUI start size
@@ -70,7 +52,6 @@ class GUI:
         #copy button
         self.copy_button = Button(self.right_side, text="Copy", command=self.copy)
         self.copy_button.pack()
-<<<<<<< HEAD
     
     def resize_img(self):
         """updates the input to the right size"""
@@ -78,12 +59,6 @@ class GUI:
         im = Image.open("input.png")
         im.thumbnail(size)
         im.save("input.png")
-=======
-        
-        #paste button
-        self.paste_button = Button(self.right_side, text="Paste", command=self.paste)
-        self.paste_button.pack()
->>>>>>> 28c33c85968e94e24c10555f1671a08c532dcf68
 
     def convert(self):
         """converts input.png into a string of a word"""
@@ -105,12 +80,3 @@ class GUI:
         self.resize_img()
         self.input_image=ImageTk.PhotoImage(Image.open("input.thumbnail"))
         self.image = self.image_view.create_image(0, 0, anchor=NW, image=self.input_image)
-<<<<<<< HEAD
-=======
-
-        
-root = Tk()
-root.geometry("925x510") #GUI start size
-my_gui = GUI(root)
-root.mainloop()
->>>>>>> 28c33c85968e94e24c10555f1671a08c532dcf68
