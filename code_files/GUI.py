@@ -78,5 +78,5 @@ class GUI:
         im = ImageGrab.grabclipboard()
         im.save('input.png','PNG')
         self.resize_img()
-        self.input_image=ImageTk.PhotoImage(Image.open("input.thumbnail"))
+        self.input_image=ImageTk.PhotoImage(Image.open("input.png"))
         self.image = self.image_view.create_image(0, 0, anchor=NW, image=self.input_image)
